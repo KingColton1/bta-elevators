@@ -7,6 +7,7 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import net.minecraft.server.entity.player.EntityPlayerMP;
+import net.minecraft.core.net.command.CommandSender;
 
 public class ElevatorBlock extends Block{
 	public ElevatorBlock(String key, int id, Material material) {
@@ -14,7 +15,7 @@ public class ElevatorBlock extends Block{
 	}
 
 	// returns true if we teleported
-	public static boolean jump(World world, int x, int y, int z, EntityPlayer player){
+	public static boolean jump(World world, int x, int y, int z, EntityPlayer player, CommandSender msgToPlr){
 		int counter = 2;
 		for(int y2 = y+1; y2 < 255; y2++){
 			if(counter > 0){
@@ -28,6 +29,7 @@ public class ElevatorBlock extends Block{
 				return true;
 			}
 			else if (world.getBlockId(x, y2, z) != 0 && !ElevatorsMod.allowObstructions) {
+				msgToPlr.sendMessage("Elevator above you isn't found.");
 				break;
 			}
 		}

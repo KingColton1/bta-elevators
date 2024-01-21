@@ -1,5 +1,6 @@
 package watermelonmojito.elevatorsmod.mixin;
 
+import net.minecraft.core.net.command.CommandSender;
 import watermelonmojito.elevatorsmod.ElevatorsMod;
 import watermelonmojito.elevatorsmod.server.ElevatorBlock;
 import net.minecraft.core.block.Block;
@@ -73,7 +74,7 @@ public abstract class EntityPlayerMixin extends EntityLiving {
 
 
 		if(dy > 0.109 && cooldown <= 0 && stoodOnElevator && Math.abs(this.x - (elevatorBlockX+0.5f)) < 0.5f && Math.abs(this.z - (elevatorBlockZ+0.5f)) < 0.5f && this.y - elevatorBlockY > 0){
-			if (ElevatorBlock.jump(world, elevatorBlockX, elevatorBlockY, elevatorBlockZ, thisAs)) {
+			if (ElevatorBlock.jump(world, elevatorBlockX, elevatorBlockY, elevatorBlockZ, thisAs, (CommandSender)thisAs)) {
 				// reset y velocity and cooldown if we teleported
 				cooldown = ElevatorsMod.elevatorCooldown;
 				this.yd = 0;
